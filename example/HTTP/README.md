@@ -16,3 +16,4 @@
 # HTTP 请求报文和响应报文
 请求报文：请求行（请求方法、请求URL、协议版本）、可选的请求首部字段、内容实体。
 响应报文：协议版本、状态码、状态码原因短语、响应首部字段、内容主体。
+![](https://github.com/dlyt/blog/blob/master/imgs/%7BD62C3525-1FCD-43C5-B9D5-4E82EDFF89C7%7D.jpg)
