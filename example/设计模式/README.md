@@ -73,6 +73,46 @@ class Facade {
 let fa = new Facade();
 fa.facade({ run: true, val: 10 });
 ```
+# 工厂模式
+```js
+class VehicleFactory {
+    constructor() {
+        this.vehicleClass = Car;
+    }
+    createVehicle(options) {
+        if (options.vehicleType === "car") {
+            this.vehicleClass = Car;
+        } else {
+            this.vehicleClass = Truck;
+        }
+        return new this.vehicleClass(options);
+    }
+}
+
+class Car {
+    constructor(options) {
+        // some defaults
+        options = options || "";
+        this.doors = options.doors || 4;
+        this.state = options.state || "brand new";
+        this.color = options.color || "silver";
+    }
+}
+class Truck {
+    constructor(options) {
+        this.state = options.state || "used";
+        this.wheelSize = options.wheelSize || "large";
+        this.color = options.color || "blue";
+    }
+}
+//usage 
+let carFactory = new VehicleFactory();
+let car = carFactory.createVehicle({
+    vehicleType: "car",
+    color: "yellow",
+    doors: 6
+});
+```
 # 观察者模式
 雪崩事件是观察者模式的实例么？
 它定义对象间的一种一对多的依赖关系，当一个对象的状态发生改变时，所有依赖于它的对象都将得到通知。
@@ -113,6 +153,45 @@ console.log(carManager.execute('requestInfo', 'Ford', 110))
 - 是继承关系的一个替代方案
 - 动态地给对象添加额外的职责
 - 在不改变接口的前提下，增强类的性能
+装饰模式是只针对一个基本的对象，添加一些修饰。如下面的是对MacBook，加内存（Memory函数装饰）增加75美元，雕刻（Engraving函数装饰）增加200美元，买保险（Insurance函数装饰）增加250美元。
+```js
+class MacBook {
+    cost() {
+        return 997;
+    }
+    screenSize() {
+        return 11.6;
+    }
+}
+
+function Memory(macbook) {
+    let v = macbook.cost();
+    macbook.cost = function() {
+        return v + 75;
+    };
+}
+// Decorator 2
+function Engraving(macbook) {
+
+    let v = macbook.cost();
+    macbook.cost = function() {
+        return v + 200;
+    };
+}
+// Decorator 3
+function Insurance(macbook) {
+    let v = macbook.cost();
+    macbook.cost = function() {
+        return v + 250;
+    };
+}
+let mb = new MacBook();
+Memory(mb);
+Engraving(mb);
+Insurance(mb);
+console.log(mb.cost());// Outputs: 1522
+console.log(mb.screenSize());// Outputs: 11.6
+```
 # 代理模式
 图片预加载
 # 迭代器模式
