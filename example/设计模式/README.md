@@ -1,6 +1,6 @@
-# 单例模式
+### 单例模式
 在Node.js中创建单例模式非常的简单，只需要用 require 即可。
-## 惰性单例模式
+#### 惰性单例模式
 在合适的时候才创建对象，并且只创建唯一的一个。
 实例：登录框
 ```js
@@ -11,7 +11,7 @@ var getSingle = function( fn ){
  }
 }; 
 ```
-# 策略模式
+### 策略模式
 策略模式的定义是：定义一系列的算法，把它们一个个封装起来，并且使它们可以相互替换。
 优点
 1. 避免多重选择语句
@@ -49,7 +49,7 @@ var calculateBonus = function( level, salary ){
 console.log( calculateBonus( 'S', 20000 ) ); // 输出：80000
 console.log( calculateBonus( 'A', 10000 ) ); // 输出：30000 
 ```
-# 外观模式
+### 外观模式
 外观模式只暴露一个很简单的方法，然后该方法在内部执行，调用内部的其他方法。
 ```js
 class Facade {
@@ -73,7 +73,7 @@ class Facade {
 let fa = new Facade();
 fa.facade({ run: true, val: 10 });
 ```
-# 工厂模式
+### 工厂模式
 工厂模式使我们不需要使用构造器，而是提供一个泛型接口来创建对象。这种模式在创建过程变得复杂时会非常有用。
 ```js
 class VehicleFactory {
@@ -114,7 +114,7 @@ let car = carFactory.createVehicle({
     doors: 6
 });
 ```
-# 观察者模式
+### 观察者模式
 雪崩事件是观察者模式的实例么？
 它定义对象间的一种一对多的依赖关系，当一个对象的状态发生改变时，所有依赖于它的对象都将得到通知。
 真实例子
@@ -127,7 +127,7 @@ let car = carFactory.createVehicle({
 缺点：
 销毁时间和内存
 如果订阅了一个消息，最后都没有发生，订阅者会一直存在内存中
-# 命令模式
+### 命令模式
 应用场景：
 有时候需要向某些对象发送请求，但是并不知道请求的接收者是谁，也不知道被请求的操作是什么，此时希望用一种松耦合的方式来设计软件，使得请求发送者和请求接收者能够消除彼此之间的耦合关系。
 只使用一个方法，第一个参数是我们实际调用的方法，后面的参数是作为该调用方法的参数
@@ -144,10 +144,10 @@ class CarManager {
 const carManager = new CarManager();
 console.log(carManager.execute('requestInfo', 'Ford', 110))
 ```
-# 组合模式
+### 组合模式
 当按下遥控器的按钮时，所有命令都将被依次执行。
 扫描文件夹
-# 装饰者模式
+### 装饰者模式
 装饰模式经典的应用是AOP编程，比如“日志系统”。
 - 是继承关系的一个替代方案
 - 动态地给对象添加额外的职责
@@ -191,7 +191,7 @@ Insurance(mb);
 console.log(mb.cost());// Outputs: 1522
 console.log(mb.screenSize());// Outputs: 11.6
 ```
-# 代理模式
+### 代理模式
 图片预加载
-# 迭代器模式
+### 迭代器模式
 forEach 循环
