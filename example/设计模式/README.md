@@ -49,10 +49,30 @@ var calculateBonus = function( level, salary ){
 console.log( calculateBonus( 'S', 20000 ) ); // 输出：80000
 console.log( calculateBonus( 'A', 10000 ) ); // 输出：30000 
 ```
-# 代理模式
-图片预加载
-# 迭代器模式
-forEach 循环
+# 外观模式
+外观模式只暴露一个很简单的方法，然后该方法在内部执行，调用内部的其他方法。
+```js
+class Facade {
+    _get() {
+        console.log("current value:" + this.i);
+    }
+    _set(val) {
+        this.i = val;
+    }
+    _run() {
+        console.log("running");
+    }
+    facade(args) {
+        this._set(args.val);
+        this._get();
+        if (args._run) {
+            this._run();
+        }
+    }
+}
+let fa = new Facade();
+fa.facade({ run: true, val: 10 });
+```
 # 观察者模式
 雪崩事件是观察者模式的实例么？
 它定义对象间的一种一对多的依赖关系，当一个对象的状态发生改变时，所有依赖于它的对象都将得到通知。
@@ -68,9 +88,21 @@ forEach 循环
 如果订阅了一个消息，最后都没有发生，订阅者会一直存在内存中
 # 命令模式
 应用场景：
-有时候需要向某些对象发送请求，但是并不知道请求的接收者是谁，也不知道被请
-求的操作是什么，此时希望用一种松耦合的方式来设计软件，使得请求发送者和请求接
-收者能够消除彼此之间的耦合关系。
+有时候需要向某些对象发送请求，但是并不知道请求的接收者是谁，也不知道被请求的操作是什么，此时希望用一种松耦合的方式来设计软件，使得请求发送者和请求接收者能够消除彼此之间的耦合关系。
+只使用一个方法，第一个参数是我们实际调用的方法，后面的参数是作为该调用方法的参数
+```js
+class CarManager {
+    requestInfo(model, id) {
+        return `The information for ${model} with ID ${id} is foobar` 
+    }
+    execute(name) {
+        const carManager = new CarManager();
+        return carManager[name] && carManager[name].apply(carManager, [].slice.call(arg, 1));
+    }
+}
+const carManager = new CarManager();
+console.log(carManager.execute('requestInfo', 'Ford', 110))
+```
 # 组合模式
 当按下遥控器的按钮时，所有命令都将被依次执行。
 扫描文件夹
@@ -81,3 +113,7 @@ forEach 循环
 - 是继承关系的一个替代方案
 - 动态地给对象添加额外的职责
 - 在不改变接口的前提下，增强类的性能
+# 代理模式
+图片预加载
+# 迭代器模式
+forEach 循环
