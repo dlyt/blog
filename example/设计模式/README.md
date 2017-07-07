@@ -1,5 +1,20 @@
+## JaveScript 设计模式
+使用设计模式是为了可重用代码、让代码更容易被他人理解、保证代码可靠性。
 ### 单例模式
 在Node.js中创建单例模式非常的简单，只需要用 require 即可。
+```js
+var Singleton = {
+    attr: 1,
+    another_attr: 'value',
+    method: function() {...},
+    another_method: function() {...}
+};
+```
+因为它是一个对象字面量，所以我不需要实例化它，并且这个对象仅此一个。也就是说我们可以通过一个全局变量的入口访问所有的方法和属性，如下所示：
+```js
+Singleton.attr += 1;
+Singleton.method();
+```
 #### 惰性单例模式
 在合适的时候才创建对象，并且只创建唯一的一个。
 实例：登录框
@@ -51,6 +66,22 @@ console.log( calculateBonus( 'A', 10000 ) ); // 输出：30000
 ```
 ### 外观模式
 外观模式只暴露一个很简单的方法，然后该方法在内部执行，调用内部的其他方法。
+```js
+function setStyles(elements, styles) {
+    for (var i=0, length = elements.length; i < length; i++) {
+        var element = document.getElementById(elements[i]);
+
+        for (var property in styles) {
+            element.style[property] = styles[property];
+        }
+    }
+}
+
+setStyles(['foo', 'bar', 'baz'], {
+    color: 'red',
+    width: '150px'
+});
+```
 ```js
 class Facade {
     _get() {
@@ -152,6 +183,21 @@ console.log(carManager.execute('requestInfo', 'Ford', 110))
 - 是继承关系的一个替代方案
 - 动态地给对象添加额外的职责
 - 在不改变接口的前提下，增强类的性能
+简单说：可以动态的给某个对象添加额外的职责，而不会影响从这个类中派生的其它对象。
+```js
+var car = new Car();                    // log打印 "装配(assemble)：组建车架，添加主要部件"
+
+// 给车装上动力表盘
+car = new PowerWindowDecorator(car);    // log打印 "装配：添加动力表盘"
+
+// 现在加装动力锁和空调
+car = new PowerLocksDecorator(car);     // log打印 "装配：添加动力锁"
+car = new ACDecorator(car);             // log打印 "装配：添加空调"
+
+// 让我们发动这个坏小子出去兜兜风吧!
+car.start(); // log打印 '伴随着引擎的轰鸣声，车子发动了！' 和 '冷风吹起来'
+car.drive(); // log打印 '走起!' 和 '车门自动上锁'
+```
 装饰模式是只针对一个基本的对象，添加一些修饰。如下面的是对MacBook，加内存（Memory函数装饰）增加75美元，雕刻（Engraving函数装饰）增加200美元，买保险（Insurance函数装饰）增加250美元。
 ```js
 class MacBook {
