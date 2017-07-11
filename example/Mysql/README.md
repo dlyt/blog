@@ -81,6 +81,38 @@ InnoDB：支持
 - 有足够的内存
 - 对数据一致性要求不高，如在线人数和session等应用
 - 需要定期归档数据
+### sql语句优化
+1、避免在 where 子句中使用 or 来连接
+```sql
+select id from t where num = 10
+union all
+select id from t where Name = 'admin'
+```
+2、应尽量避免在 where 子句中使用 != 或者 <> 操作符，否则将引擎放弃使用索引而进行全表扫描。
+
+3、in 和 not in 也要慎用，否则会导致全表扫描
+
+4、很多时候用 exists 代替 in 是一个好的选择
+```sql
+select num from a where num in(select num from b);
+```
+用下面的语句替换：
+```sql
+select num from a where exists(select 1 from b where num=a.num);
+```
+### InnoDB锁介绍-InnoDB中的死锁
+#### 死锁
+当两个以上的运算单元，双方都在等待对方停止运行，以获取系统资源，但是没有一方提前退出时，就称之为死锁。
+#### 死锁的产生条件
+死锁产生必须要满足以下四个条件：
+    1.互斥条件：即为某个资源在同一时间只允许被一个单元占有。
+    2.不可抢占条件：被单元占有的资源部可被其它单元抢占。
+    3.占有且申请条件：单元当前至少占有个资源，且该单元同时向系统申请其它的资源。
+    4.循环等待条件：单元之前存在一个资源的循环等待序列。
+#### 三范式
+一范式 表中字段不可分割
+二范式 要有主键
+三范式 消除冗余，就是各种信息只在一个地方存储，不出现在多张表中。
 ### 查看数据库存储引擎
 ```sql
 show variables like '%storage_engine%';
