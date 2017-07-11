@@ -100,7 +100,7 @@ select num from a where num in(select num from b);
 ```sql
 select num from a where exists(select 1 from b where num=a.num);
 ```
-### InnoDB锁介绍-InnoDB中的死锁
+### InnoDB锁介绍-InnoDB中的死锁 
 #### 死锁
 当两个以上的运算单元，双方都在等待对方停止运行，以获取系统资源，但是没有一方提前退出时，就称之为死锁。
 #### 死锁的产生条件
