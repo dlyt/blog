@@ -12,6 +12,7 @@
 10. [函数式编程](https://github.com/dlyt/blog/tree/master/example/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B)
 11. [CommonJS规范](https://github.com/dlyt/blog/tree/master/example/CommonJS%E8%A7%84%E8%8C%83)
 12. [Redis](https://github.com/dlyt/blog/tree/master/example/Redis)
+13. [Egg](https://github.com/dlyt/blog/tree/master/example/Egg)
 
 
 
