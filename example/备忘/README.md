@@ -2,9 +2,9 @@
 npm config set registry https://registry.npm.taobao.org --global
 npm config set disturl https://npm.taobao.org/dist --global
 
-提到 async await 说一下内部机制（蒙蔽），细问 await 干什么的？
+提到 async await 说一下内部机制，细问 await 干什么的？
 
-Promise 内部实现机制（蒙蔽中）
+Promise 内部实现机制
 
 为什么选择 Token， 与 Seesion 区别?
 　　
