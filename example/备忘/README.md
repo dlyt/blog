@@ -16,3 +16,10 @@ Session 怎么识别用户？
 
 实习中提到了跨域，说一下跨域的解决方案
 问怎么处理 options 预检请求
+
+Promise、Generator、Async、Co: 20 10
+Redis：20 10
+mysql：20 10
+mongodb：20 10
+设计模式：5 2
+Express、Koa：15 7
