@@ -17,9 +17,11 @@ Session 怎么识别用户？
 实习中提到了跨域，说一下跨域的解决方案
 问怎么处理 options 预检请求
 
-Promise、Generator、Async、Co: 20 10
-Redis：20 10
-mysql：20 10
-mongodb：20 10
-设计模式：5 2
-Express、Koa：15 7
+Promise（bluebird 高性能的原因）、Generator、Async、Co: 20 
+Redis：20 
+mysql（优化）：20 
+mongodb（优化）：20 
+Express、Koa：10 
+跨域、token、session: 5
+设计模式：5 
+雪崩事件

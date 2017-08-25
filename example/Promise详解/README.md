@@ -10,7 +10,14 @@
 - `Promise.prototype.catch()`
 ### 上面二种方法有什么区别？
 第二种方法可以捕获前面`then`方法执行中的错误，所以推荐使用第二种方法。
-### Promise 内部实现机制？
+### Promise 内部实现机制？ 
+### 为什么使用第三方库中 Promise?
+- 更快
+- 更多好用的方法
+### Bluebird 高性能的原因
+- 函数中对象分配最小化
+- 减少对象体积
+- 可选特性懒重写
 
 ## 什么是Promise?
 所谓Promise,简单说就是一个容器，里面保存着某个未来才会结束的事件的（通常是一个异步操作）的结果。
@@ -41,3 +48,16 @@ var p = Promise.race([p1, p2, p3])
 Promise 对象的回调链，不管以 then 方法或 catch 方法结尾，要是最后一个方法抛出错误，都有可能无法捕获到（因为 Promise 内部的错误不会冒泡到全局）。因此，我们可以提供一个 done 方法，总是处于回调链的尾部，保证抛出的任何可能出现的错误。
 ## Promise.prototype.finally()
 finally 方法用于指定不管 Promise 对象最后状态如何，都会执行的操作。它与 done 方法的最大区别，它接收一个普通回调函数作为参数，该函数不管怎样都必须执行。
+
+## Bluebird 详解
+
+### Promise.map()
+遍历一个数组或者一个数组的promise，对每一个元素使用mapper函数（参数依次为item、idnex、arrayLength）。
+
+如果任何一个promise实例执行失败，则返回状态为reject的Promise实例。
+
+还可以用于替代`数组.push + Promise.all`
+### 函数 Promise 化
+Promise化是指将一个不符合promise规范的API改造成返回promise的API。
+
+在Node.js中，通常的做法是使用`promisify`来包装非Promise对象，然后就可以使用符合promise规范的方法了。
