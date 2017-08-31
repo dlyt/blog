@@ -11,3 +11,47 @@ MongoDb是对传统关系型数据库的补充，但是MongoDb不支持事务；
 #### mongodb的缺点
 - 不支持事务操作
 - 占用空间大
+
+### 查询数组不未空
+```
+ME.find({'pictures.0': {$exists: 1}});
+```
+
+### explain() 输出参数解析
+explain.queryPlanner.indexFilterSet:针对该query是否有indexfilter
+
+explain.queryPlanner.winningPlan.direction：此query的查询顺序，此处是forward，如果用了.sort({modify_time:-1})将显示backward。
+
+executionStats.executionTimeMillis: query的整体查询时间。
+
+executionStats.executionStages.stage : query的整体查询时间。
+
+COLLSCAN	全表扫描
+
+IXSCAN	扫描索引
+
+FETCH	根据索引去检索指定document
+
+SHARD_MERGE	将各个分片返回数据进行merge
+
+SORT	表明在内存中进行了排序
+
+LIMIT	使用limit限制返回数
+
+SKIP	使用skip进行跳过
+
+IDHACK	针对_id进行查询
+
+SHARDING_FILTER	通过mongos对分片数据进行查询
+
+COUNT	利用db.coll.explain().count()之类进行count运算
+
+COUNTSCAN	count不使用Index进行count时的stage返回
+
+COUNT_SCAN	count使用了Index进行count时的stage返回
+
+SUBPLA	未使用到索引的$or查询的stage返回
+
+TEXT	使用全文索引进行查询时候的stage返回
+
+PROJECTION	限定返回字段时候stage的返回

@@ -3,14 +3,27 @@
 一个容器，里面装着未来才会结束的事件的结果。
 一个对象，可以获取异步操作的消息。
 ### Promise有什么特点？
-- 有三种状态，不受外界影响。
+- 有三种状态 `Pending`(进行中)、`Fulfilled`(已成功)和`Rejected`(已失败)，不受外界影响。
 - 状态一但改变就不再变，随时可以得到结果。
 ### Promise有几种捕获错误的方法？
 - `then()`的第二个参数 
 - `Promise.prototype.catch()`
 ### 上面二种方法有什么区别？
 第二种方法可以捕获前面`then`方法执行中的错误，所以推荐使用第二种方法。
-### Promise 内部实现机制？ 
+### Promise 具体流程？ 
+1.实例化一个最初的`Promise`对象，设置最初的状态为`Pending`。
+
+2.通过`then`方法，创建一个新的`Promise`对象，由于上一级`Promise`暂时处于`Pending`状态，当前`then`方法的`onFulfilled`函数和新`Promise`的`resolve`方法放到上一级`Promise`的`deferreds`数组中。
+
+3.这样就形成这样一个画面：第一个`Promise`被实例化，调用`then`方法。`then`会返回一个新的`Promise`对象，在上一个`then`方法的基础上继续通过新的`Promise`的`then`，形成一条调用链。每一个被创建出来的新的`Promise`的`resolve`都将传给上一级的`Promise`的`deferreds`数组来维护。
+
+4.在第一个`Promise`对象的回调函数中执行异步操作，完成后调用`Promise`的`resolve`方法。
+
+5.`resolve`允许传入一个参数，该参数的值通过`Promise`内部的`_value`变量维护。`resolve`会把`Promise`的状态修改为`fulfilled`，然后异步调用`handle`依次处理`deferreds`数组中的每一个`deferred`。
+
+6.此时第一个`Promise`的状态在上一步中被改为`fulfilled`，于是`handle`主要完成的工作是，执行`deferred`的`onFulfilled`函数，并调用下一个`Promise`的`resolve`方法。
+
+7.下一个`Promise`的`resolve`在上一级被执行成功后，同样会将状态切换到`fulfilled`，重复步骤6直到结束。
 ### 为什么使用第三方库中 Promise?
 - 更快
 - 更多好用的方法
@@ -18,7 +31,8 @@
 - 函数中对象分配最小化
 - 减少对象体积
 - 可选特性懒重写
-
+### Promise 处理并发
+Promise.all()、Promise.map()
 ## 什么是Promise?
 所谓Promise,简单说就是一个容器，里面保存着某个未来才会结束的事件的（通常是一个异步操作）的结果。
 
