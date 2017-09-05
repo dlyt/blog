@@ -17,6 +17,11 @@ MongoDb是对传统关系型数据库的补充，但是MongoDb不支持事务；
 ME.find({'pictures.0': {$exists: 1}});
 ```
 
+### 新增索引
+db.things.ensureIndex({j:1})
+### 查看所有索引
+db.things.getIndexes()
+
 ### explain() 输出参数解析
 explain.queryPlanner.indexFilterSet:针对该query是否有indexfilter
 
