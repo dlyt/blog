@@ -17,7 +17,6 @@ Session 怎么识别用户？
 说一下跨域的解决方案
 问怎么处理 options 预检请求
 
-<<<<<<< HEAD
 
 let 与 var 的区别
 
@@ -26,7 +25,6 @@ let 一般与 {} 块联合使用，即在块中使用 let 声明的变量只在�
 let 与 for 联合使用的时候，因为 let 声明的变量只在块中有效，所以每一次循环当中都会声明一个新的循环变量。（这里还需要注意，for 循环当中，循环语句部分是一个父作用域，而循环体内部是一个单独的子作用域）
 let 不允许重复声明。
 
-=======
 Promise（bluebird 高性能的原因）、Generator、Async、Co
 Redis
 mysql（优化）
@@ -35,4 +33,3 @@ Express、Koa
 跨域、token、session
 设计模式
 雪崩事件
->>>>>>> 2146364259afd2da3da844fe86904cc6ed4e90f3
