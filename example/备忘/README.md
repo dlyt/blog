@@ -2,7 +2,7 @@
 npm config set registry https://registry.npm.taobao.org --global
 npm config set disturl https://npm.taobao.org/dist --global
 
- async await 说一下内部机制 await 干什么的？
+async await 内部机制 await 干什么的？
 
 Promise 内部实现机制
 
@@ -10,13 +10,12 @@ Promise 内部实现机制
 　　
 Session 怎么识别用户？
 
-那你是怎么做 Token 延时的？
+怎么做 Token 延时的？
 
 为什么用 MongoDB ？ MongoDB 和 MySQL 的存储方式有什么区别？
 
-说一下跨域的解决方案
+跨域的解决方案
 问怎么处理 options 预检请求
-
 
 let 与 var 的区别
 

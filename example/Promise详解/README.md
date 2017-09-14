@@ -10,6 +10,8 @@
 - `Promise.prototype.catch()`
 ### 上面二种方法有什么区别？
 第二种方法可以捕获前面`then`方法执行中的错误，所以推荐使用第二种方法。
+### Promise 处理并发
+Promise.all()、Promise.map()
 ### Promise 具体流程？ 
 1.实例化一个最初的`Promise`对象，设置最初的状态为`Pending`。
 
@@ -31,8 +33,6 @@
 - 函数中对象分配最小化
 - 减少对象体积
 - 可选特性懒重写
-### Promise 处理并发
-Promise.all()、Promise.map()
 ## 什么是Promise?
 所谓Promise,简单说就是一个容器，里面保存着某个未来才会结束的事件的（通常是一个异步操作）的结果。
 
