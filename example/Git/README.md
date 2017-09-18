@@ -11,3 +11,8 @@ git revert < commit id >
 ```bash
 git revert --mainline 1 < commit id >
 ```
+### 重置
+git rebase -i < commit id >
+修改文件内容
+切换到master
+merge
