@@ -38,3 +38,7 @@ git push origin master --tags
 ```bash
 git tag -d v1.0.0
 ```
+删除远程tag
+```bash 
+git push origin :refs/tags/v1.0.0
+```
