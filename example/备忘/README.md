@@ -32,3 +32,5 @@ Express、Koa
 跨域、token、session
 设计模式
 雪崩事件
+
+JS面向对象的编程思想，继承，原型，闭包
