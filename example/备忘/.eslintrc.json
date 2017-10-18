@@ -1,0 +1,24 @@
+{
+    "parser": "babel-eslint",
+    // "extends": "standard",
+    "rules": {
+        "indent": ["error", 4], // 缩进控制 4空格 
+        "semi": ["error", "always"], //不得省略语句结束的分号 
+        "new-cap": "error", // 要求构造函数首字母大写 
+        "strict": "error", // 使用强制模式开关use strict;  
+      //   "camelcase": ["error", {"properties": "never"}], // 要求使用骆驼拼写法 
+        "curly": ["error", "multi-line"], // if、else if、else、for、while强制使用大括号，但允许在单行中省略大括号。
+        // 要求或禁止在一元操作符之前或之后存在空格,
+        // new、delete、typeof、void、yield要求有空格，-、+、--、++、!、!!要求无空格。
+        "space-unary-ops": "error", 
+        "spaced-comment": ["error", "always"], // 要求在注释前有空白
+        "generator-star-spacing": ["error", {"before": false, "after": true}], // 强制 generator 函数中 * 号前有空格，后无空格。 
+        "no-tabs": "off", // 解决no-tabs问题
+        "quotes": ["error", "single"],  // 字符串开头和结束使用单引号 
+        "prefer-const": "error",  // 如果一个变量不会被重新赋值，最好使用const进行声明。
+        "no-spaced-func": "error", // 禁止 function 标识符和圆括号之间有空格 
+        "no-var": "error" // 用let/const代替 
+        // 逗号后有一个空格
+    }
+}
+  
