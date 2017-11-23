@@ -17,10 +17,16 @@ git rebase -i < commit id >
 切换到master
 merge
 ### 子模块
-更新子模块
+#### 更新子模块
 ```bash
 git submodule update --init --recursive
 ```
+#### 克隆子模块
+```bash
+git submodule add git@git.dxl.cc:node/dxlModule.git dxlModule
+```
+#### 切换分支
+到子目录下进行切换
 ### gitHub tag
 列出标签
 ```bash
@@ -42,3 +48,4 @@ git tag -d v1.0.0
 ```bash 
 git push origin :refs/tags/v1.0.0
 ```
+
