@@ -13,3 +13,10 @@
 -p 27017:27017 :将容器的27017 端口映射到主机的27017 端口
 
 -v $PWD/db:/data/db :将主机中当前目录下的db挂载到容器的/data/db，作为mongo数据存储目录
+### nginx 
+docker run -p 80:80 --name mynginx -v /Users/simple/Desktop/gitlab/website/static:/www -v $PWD/conf/nginx.conf:/etc/nginx/nginx.conf -d nginx 
+
+挂载ip地址
+
+### 加速
+https://www.daocloud.io/
