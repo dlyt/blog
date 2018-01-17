@@ -20,6 +20,11 @@ merge
 #### 更新子模块
 ```bash
 git submodule update --init --recursive
+git submodule foreach git pull
+```
+#### 更新新提交
+```bash
+Subproject commit
 ```
 #### 克隆子模块
 ```bash
@@ -47,5 +52,12 @@ git tag -d v1.0.0
 删除远程tag
 ```bash 
 git push origin :refs/tags/v1.0.0
+```
+
+### 配置
+```bash
+git config --list
+git config --global user.name "John Doe"
+git config --global user.email johndoe@example.com
 ```
 

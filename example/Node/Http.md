@@ -13,7 +13,7 @@
 
 `onconnection`事件会实例化`Socket`，然后触发`connection`事件，并将`Socket`传过去。`connection`事件的执行函数是`connectionListener`。
 
-值得一提的是，parser 是从一个“池”中获取的，这个“池”使用了一种叫做 free list（wiki）的数据结构，实现很简单，个人觉得是为了尽可能的对 parser 进行重用，并避免了不断调用构造函数的消耗，且设有数量上限
+值得一提的是，parser 是从一个“池”中获取的，这个“池”使用了一种叫做 free list 的数据结构，实现很简单，个人觉得是为了尽可能的对 parser 进行重用，并避免了不断调用构造函数的消耗，且设有数量上限
 `connectionListener`会实例化`parser`来解析请求头。
 1. `parserOnHeaders`: 不断解析推入的请求头数据。
 2. `parserOnHeadersComplete`: 请求头解析完毕，构造 header 对象，为请求体创建`http.IncomingMessage`实例。

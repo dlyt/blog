@@ -2,3 +2,5 @@
 ```bash
 nginx -s reload
 ```
+### mac路径
+/usr/local
