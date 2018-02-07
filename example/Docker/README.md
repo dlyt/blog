@@ -20,3 +20,24 @@ docker run -p 80:80 --name mynginx -v /Users/simple/Desktop/gitlab/website/stati
 
 ### 加速
 https://www.daocloud.io/
+
+### 想要删除untagged images，也就是那些id为<None>的image的话可以用
+```bash
+docker rmi $(docker images | grep "^<none>" | awk "{print $3}")
+```
+### 删除images，通过image的id来指定删除谁
+```bash
+docker rmi <image id>
+```
+### 构建镜像
+```bash 
+docker build -t <name> .
+```
+### 容器IP查询方法
+```bash
+docker inspect 容器ID或容器名 |grep '"IPAddress"'
+```
+### 进入容器
+```bash
+docker attach <44fc0f0582d9>
+```

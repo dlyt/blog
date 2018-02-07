@@ -1,56 +1,45 @@
-const path = require('path');
-const Alipay = require('alipay-node-sdk');
+const util = require('./test');
+const fs = require('fs');
+const request = require('request');
+const url = 'https://openapi.alipay.com/gateway.do?'
 
-let outTradeId = Date.now().toString();
+var r = request.post('https://openapi.alipay.com/gateway.do?app_id=2018012502071504&charset=utf-8&format=json&image_name=%E5%88%B0%E5%96%9C%E5%95%A6&image_type=jpg&method=alipay.offline.material.image.upload&sign_type=RSA2&timestamp=2018-01-31%2010%3A28%3A07&version=1.0&sign=E%2FeIkAGRnX2r44XmwgGSDn0urW%2BZ5FQ8T9ieTkWJn5bPllOaP42L3e%2Fh8Ivryc4vFWKBZZXbJZ%2Fw%2FAysS0MUA0pZ%2BPNmuPzlSjcOwSuv2Wx30tF3HDdHb0euxYM%2BmNRDABVVpuLmPf0oqQSmOi5zTXC0Q7X0or1muuzbfIoo8lO6NcUITXgPvUYeiOzaxZt2t3WoDCje3s9ytXZ5RnJl6VoW%2B3LGJayh5qCUXNRZzrYK2a7nNZxjq0uO61C8A7AXj8HbjHdfKc3I9ujt%2FhlAxjZBgeGRgaT18tVvt%2F2L6MO2oygzomqvatMdqdf6abVj40SW%2F4qA%2FKIgHMn9Nw4Qnw%3D%3D', (err, httpResponse, body) =>  {
+    console.log(body)
+})
 
-/**
- *
- * @param {Object} opts
- * @param {String} opts.appId  支付宝的appId
- * @param {String} opts.notifyUrl  支付宝服务器主动通知商户服务器里指定的页面http/https路径
- * @param {String} opts.rsaPrivate  商户私钥pem文件路径
- * @param {String} opts.rsaPublic  支付宝公钥pem文件路径
- * @param {String} opts.signType   签名方式, 'RSA' or 'RSA2'
- * @param {Boolean} [opts.sandbox] 是否是沙盒环境
- * @constructor
- */
-var ali = new Alipay({
-    appId: '2016082100308153',
-    notifyUrl: 'http://www.xxx.com/callback/alipay',
-    rsaPrivate: path.resolve('./private.pem'),
-    rsaPublic: path.resolve('./public.pem'),
-    sandbox: true,
-    signType: 'RSA2'
-});
+ 
+var form = r.form();
 
-var params = ali.pagePay({
-    subject: '测试商品',
-    body: '测试商品描述',
-    outTradeId: outTradeId,
-    timeout: '10m',
-    amount: '10.00',
-    goodsType: '0',
-    qrPayMode: 0
-});
-console.log(params);
-console.log(outTradeId)
-ali.query({
-    outTradeId: '1512438108128'
-}).then(function (ret) {
-    console.log("***** ret.body=" + ret.body);
+form.append('image_content', fs.createReadStream(__dirname + '/image2.jpg'), {filename: 'image2.jpg'});
+// fs.readFile('./image2.jpg', (err, buf) => {
+//     const par = {
+//         app_id:'2018012502071504',
+//         charset:'utf-8',
+//         format:'json',
+//         image_name:'到喜啦',
+//         image_type:'jpg',
+//         method:'alipay.offline.material.image.upload',
+//         sign_type:'RSA2',
+//         timestamp:'2018-01-31 10:28:07',
+//         version:'1.0',
+//         // app_id: '2018012502071504',
+//         // method: 'alipay.offline.material.image.upload',
+//         // charset: 'utf-8',
+//         // sign_type: 'RSA2',
+//         // timestamp: '2017-07-24 03:07:50',
+//         // version: '1.0',
+//         // image_type: 'jpg',
+//         // image_name: '美图',
+//         // image_content: 1
+//     }
     
-    //签名校验
-    var ok = ali.signVerify(ret.json());
-});
+    
+//     const arg = util.processParams(par, fs.readFileSync('./private.pem', 'utf-8'), 'RSA2')
+//     console.log(
+//         url + arg
+//     )
+//     request.get(url + arg, (err, res, body) => {
+//         console.log(body)
+//     })
+// })
 
-var fs = require('fs');
-const crypto = require('crypto')
-
-var sign = () => {
-    const str = 'app_id=2016082100308153&sign_type=RSA2'
-    const privateKey = fs.readFileSync(path.resolve('./conf/alipay/private.pem'), 'utf-8')
-    const sha = crypto.createSign('RSA-SHA256');
-    sha.update(str, 'utf8')
-    console.log(sha.sign(privateKey, 'base64'))
-}
-sign()
