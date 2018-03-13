@@ -1,43 +1,6 @@
-const format = (date, type) => {
-    const year = date.substring(0, 4);
-    const month = date.substring(4, 6);
-    const day = date.substring(6, 8);
-    if (type === 1) {
-        return year + '.' + month + '.' + day;
-    } else if (type === 2) {
-        return year + '-' + month + '-' + day;
-    }
-}
-
-const getWeek = (date) => {
-    const mydate = new Date(format(date, 2)); 
-    const myday = mydate.getDay();
-    let day;
-    switch (myday) {
-        case 0:
-            day = "星期日";
-            break;
-        case 1:
-            day = "星期一";
-            break;
-        case 2:
-            day = "星期二";
-            break;
-        case 3:
-            day = "星期三";
-            break;
-        case 4:
-            day = "星期四";
-            break;
-        case 5:
-            day = "星期五";
-            break;
-        case 6:
-            day = "星期六";
-            break;
-        default:
-            break;
-    }
-    
-}
-console.log(getWeek('20180102')) 
+const crypto = require('crypto');
+const secret = `d_uid=${encodeURIComponent('test')}&hotel_name=${encodeURIComponent('宋星际酒店-徐汇')}&pay_money=${encodeURIComponent(3000)}&timestamp=${encodeURIComponent(1514095991)}&weddingtime=${encodeURIComponent('2017-09-30 00:00:00').replace(/%20/g,'+')}`
+console.log(secret)
+const key1 = crypto.createHash('sha1').update('re#)%^FDWRD#ARE_GORBN416Q' + secret).digest('hex').toUpperCase()
+const key2 = crypto.createHash('md5').update('1514095991').digest('hex').toUpperCase()
+console.log(Buffer.from(crypto.createHash('sha1').update(key2 + key1).digest('hex').toUpperCase()).toString('base64'));
