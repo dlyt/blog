@@ -1,7 +1,7 @@
 const rp = require('request-promise');
 const querystring = require('querystring');
 
-const url = 'https://h5.ele.me/hongbao/#hardware_id=&is_lucky_group=True&lucky_number=5&track_id=&platform=0&sn=29eadb67269d8c75&theme_id=1969&device_id=&refer_user_id=4808954';
+const url = 'https://h5.ele.me/hongbao/#hardware_id=&is_lucky_group=True&lucky_number=9&track_id=&platform=0&sn=29eb55ae939cdcf1&theme_id=1833&device_id=&refer_user_id=1137474194';
 const query = querystring.parse(url);
 
 const ary = [
@@ -38,7 +38,7 @@ const ary = [
     {
         uuid: 'C44C1F2C9EF263BC398F2462460136C0',
         sign: 'f274c72d6cd17b377a81fca396e27838',
-        phone: '18840822822',
+        phone: '18840822882',
         name: 'c'
     },
     {
@@ -46,6 +46,12 @@ const ary = [
         sign: 'd52a939831a17cea420932979d96fd7e',
         phone: '18840822922',
         name: 'd'
+    },
+    {
+        uuid: '75A39FA1E1D7F8CD95886142D1273D4E',
+        sign: '82ac87654813783bfd6957402eb426ca',
+        phone: '18840822982',
+        name: 'f'
     },
     {
         uuid: 'B9B292218C1CAC8A35DA420F3FDC7530',
@@ -73,22 +79,38 @@ const index = (totalLen, sn, num) => {
             "weixin_username": ""
         })
     }).then(d => {
+        console.log(d)
+        return
         const { promotion_records } = JSON.parse(d);
         const len = promotion_records.length;
-        if (num == 7) {
-            console.log(d)
+        if (totalLen > len + ary.length) {
+            console.log('超过最大领取数')
+            console.log(len)
+            console.log(promotion_records[len - 1])
             return
         }
+        if (num == ary.length - 1) {
+            console.log('已经是最后一个')
+            console.log(promotion_records[len - 1])
+            return
+        }
+        if (len > totalLen) {
+            console.log('最大红包已经被领取')
+            console.log(promotion_records[len - 1])
+            return 
+        }
         if (totalLen - 1 == len) {
-            index(query.lucky_number, query.sn, 7)
+            console.log('下一个是最大红包')
+            index(query.lucky_number, query.sn, ary.length - 1)
         } else if (totalLen == len) {
-            console.log(d)
+            console.log('最大红包')
+            console.log(promotion_records[len - 1])
             return 
         } else {
             setTimeout(() => {
+                console.log('继续领取')
                 index(query.lucky_number, query.sn, num + 1)
-            }, 2000);
-            
+            }, 1000);
         }
     })
 }
