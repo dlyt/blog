@@ -1,7 +1,7 @@
 const rp = require('request-promise');
 const querystring = require('querystring');
 
-const url = 'https://h5.ele.me/hongbao/#hardware_id=&is_lucky_group=True&lucky_number=9&track_id=&platform=0&sn=29eb55ae939cdcf1&theme_id=1833&device_id=&refer_user_id=1137474194';
+const url = 'https://h5.ele.me/hongbao/#hardware_id=&is_lucky_group=True&lucky_number=5&track_id=&platform=0&sn=29eba893ac9d8cff&theme_id=1969&device_id=&refer_user_id=4808954';
 const query = querystring.parse(url);
 
 const ary = [
@@ -79,8 +79,6 @@ const index = (totalLen, sn, num) => {
             "weixin_username": ""
         })
     }).then(d => {
-        console.log(d)
-        return
         const { promotion_records } = JSON.parse(d);
         const len = promotion_records.length;
         if (totalLen > len + ary.length) {
