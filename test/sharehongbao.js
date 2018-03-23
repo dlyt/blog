@@ -1,7 +1,7 @@
 const rp = require('request-promise');
 const querystring = require('querystring');
 
-const url = 'https://h5.ele.me/hongbao/#hardware_id=&is_lucky_group=True&lucky_number=5&track_id=&platform=0&sn=29ec4cc03b9d8c01&theme_id=2305&device_id=&refer_user_id=4808954';
+const url = 'https://h5.ele.me/hongbao/#hardware_id=&is_lucky_group=True&lucky_number=5&track_id=&platform=0&sn=29ec619d209cdc14&theme_id=2305&device_id=&refer_user_id=1137474194';
 const query = querystring.parse(url);
 
 const ary = [
@@ -99,7 +99,7 @@ const index = (totalLen, sn, num) => {
         }
         if (totalLen - 1 == len) {
             console.log('下一个是最大红包')
-            index(query.lucky_number, query.sn, ary.length - 1)
+            // index(query.lucky_number, query.sn, ary.length - 1)
         } else if (totalLen == len) {
             console.log('最大红包')
             console.log(promotion_records[len - 1])
