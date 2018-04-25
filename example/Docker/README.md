@@ -39,5 +39,5 @@ docker inspect 容器ID或容器名 |grep '"IPAddress"'
 ```
 ### 进入容器
 ```bash
-docker attach <44fc0f0582d9>
+docker exec -it <id> /bin/bash
 ```
