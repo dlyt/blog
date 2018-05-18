@@ -1,3 +1,6 @@
 test/node_modules
 .DS_Store
 .
+test/hongbao.js
+test/package-lock.json
+.gitignore
