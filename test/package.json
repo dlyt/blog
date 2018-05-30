@@ -9,9 +9,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "commander": "^2.15.1",
     "moment": "^2.22.1",
     "querystring": "^0.2.0",
     "request": "^2.83.0",
-    "request-promise": "^4.2.2"
+    "request-promise": "^4.2.2",
+    "weixinpay": "^1.0.12"
   }
 }
