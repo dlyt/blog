@@ -87,19 +87,19 @@ const index = (totalLen, sn, num) => {
             console.log(promotion_records[len - 1])
             return 
         }
-        // if (totalLen - 1 == len) {
-        //     console.log('下一个是最大红包')
-        //     index(query.lucky_number, query.sn, ary.length - 1)
-        // } else if (totalLen == len) {
-        //     console.log('最大红包')
-        //     console.log(promotion_records[len - 1])
-        //     return 
-        // } else {
-        //     setTimeout(() => {
-        //         console.log('继续领取')
-        //         index(query.lucky_number, query.sn, num + 1)
-        //     }, 1000);
-        // }
+        if (totalLen - 1 == len) {
+            console.log('下一个是最大红包')
+            index(query.lucky_number, query.sn, ary.length - 1)
+        } else if (totalLen == len) {
+            console.log('最大红包')
+            console.log(promotion_records[len - 1])
+            return 
+        } else {
+            setTimeout(() => {
+                console.log('继续领取')
+                index(query.lucky_number, query.sn, num + 1)
+            }, 1000);
+        }
     })
 }
 
