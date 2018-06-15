@@ -1,20 +1,14 @@
 const rp = require('request-promise');
 const querystring = require('querystring');
 
-const url = 'https://h5.ele.me/hongbao/#hardware_id=&is_lucky_group=True&lucky_number=6&track_id=&platform=0&sn=29f73d33589d8c9d&theme_id=2553&device_id=&refer_user_id=4808954';
+const url = 'https://h5.ele.me/hongbao/#hardware_id=&is_lucky_group=True&lucky_number=8&track_id=&platform=0&sn=29f9ce21dd1d8c7b&theme_id=2697&device_id=&refer_user_id=4808954';
 const query = querystring.parse(url);
  
 const ary = [
     {
-        uuid: 'C115261765F3D75598FDFA3FB3C49937',
-        sign: '0dfa03ff57f0f3b2088f3ea8d5617d7b',
-        phone: '18840822122',
-        name: 'xixi'
-    },
-    {
         uuid: 'D2B37EF38D4CF19B94D59C4749D6FA4F',
         sign: 'a453472d4659fdc757bdb16dba4b58ed',
-        phone: '18840822322',
+        phone: '18840822822',
         name: 'a'
     },
     {
@@ -24,34 +18,28 @@ const ary = [
         name: 'wang'
     },
     {
-        uuid: 'BBFDE64C5A63DC021BDDAAA532E377D5',
-        sign: '73999a0b629451bba10a892e2ddc06b5',
-        phone: '18840822522',
-        name: 'zhang'
-    },
-    {
-        uuid: '9CF4F6CC0DD71B696620D41AA6232EAA',
-        sign: 'b84673a5b590f3acc73ff2a8637c1084',
-        phone: '18840822622',
-        name: 'b'
-    },
-    {
         uuid: 'C44C1F2C9EF263BC398F2462460136C0',
         sign: 'f274c72d6cd17b377a81fca396e27838',
         phone: '18840822882',
         name: 'c'
     },
     {
-        uuid: 'D4EBA9839B22BDB9BEFFDFBA6C32C1A8',
-        sign: 'd52a939831a17cea420932979d96fd7e',
-        phone: '18840822922',
-        name: 'd'
+        uuid: 'BBFDE64C5A63DC021BDDAAA532E377D5',
+        sign: '73999a0b629451bba10a892e2ddc06b5',
+        phone: '18840822880',
+        name: 'zhang'
     },
     {
-        uuid: '75A39FA1E1D7F8CD95886142D1273D4E',
-        sign: '82ac87654813783bfd6957402eb426ca',
-        phone: '18840822982',
-        name: 'f'
+        uuid: 'F0050CFFB1A828972CD63CA42DE4B9D5',
+        sign: 'ccb9d7e5f0bffdf0ec95d1d8785d0c8e',
+        phone: '18840822090',
+        name: 'zhangxiao'
+    },
+    {
+        uuid: '82A43D5166AE46FBCB8086C380E0BB14',
+        sign: '16f2666e6cf9a905f683b8096622c05f',
+        phone: '18840822091',
+        name: 'zhang'
     },
     {
         uuid: 'B9B292218C1CAC8A35DA420F3FDC7530',
@@ -80,7 +68,9 @@ const index = (totalLen, sn, num) => {
         })
     }).then(d => {
         const { promotion_records } = JSON.parse(d);
+        console.log(JSON.parse(d))
         const len = promotion_records.length;
+        console.log(len)
         if (totalLen > len + ary.length) {
             console.log('超过最大领取数')
             console.log(len)
@@ -97,19 +87,19 @@ const index = (totalLen, sn, num) => {
             console.log(promotion_records[len - 1])
             return 
         }
-        if (totalLen - 1 == len) {
-            console.log('下一个是最大红包')
-            index(query.lucky_number, query.sn, ary.length - 1)
-        } else if (totalLen == len) {
-            console.log('最大红包')
-            console.log(promotion_records[len - 1])
-            return 
-        } else {
-            setTimeout(() => {
-                console.log('继续领取')
-                index(query.lucky_number, query.sn, num + 1)
-            }, 1000);
-        }
+        // if (totalLen - 1 == len) {
+        //     console.log('下一个是最大红包')
+        //     index(query.lucky_number, query.sn, ary.length - 1)
+        // } else if (totalLen == len) {
+        //     console.log('最大红包')
+        //     console.log(promotion_records[len - 1])
+        //     return 
+        // } else {
+        //     setTimeout(() => {
+        //         console.log('继续领取')
+        //         index(query.lucky_number, query.sn, num + 1)
+        //     }, 1000);
+        // }
     })
 }
 
