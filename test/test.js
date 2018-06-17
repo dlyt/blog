@@ -1,6 +1,69 @@
-const crypto = require('crypto');
-const secret = `d_uid=${encodeURIComponent('test')}&hotel_name=${encodeURIComponent('宋星际酒店-徐汇')}&pay_money=${encodeURIComponent(3000)}&timestamp=${encodeURIComponent(1514095991)}&weddingtime=${encodeURIComponent('2017-09-30 00:00:00').replace(/%20/g,'+')}`
-console.log(secret)
-const key1 = crypto.createHash('sha1').update('re#)%^FDWRD#ARE_GORBN416Q' + secret).digest('hex').toUpperCase()
-const key2 = crypto.createHash('md5').update('1514095991').digest('hex').toUpperCase()
-console.log(Buffer.from(crypto.createHash('sha1').update(key2 + key1).digest('hex').toUpperCase()).toString('base64'));
+const request = require('request')
+// let j = request.jar();
+const url = 'http://n.daoxila.com/taskOrder?act=createTask&phone=13601681020&remark=wer&order_from=front_WAP_%E5%85%A8%E5%9B%BD_Event_ActivityId2&frontEventId=2&callback=jQuery21007111117246229477_1526958223871';
+const options = {
+    url: encodeURI(url),
+    method: 'GET',
+}
+// j.setCookie(request.cookie(`PHPSESSID=ca6pj3K7yppD0NkBIHy-kiwVdg`), url, function (){});
+
+let a = 0;
+
+const start1 = () => {
+    if (a < 10000) {
+        request(options, function (err, res, body) {
+            if (err) {
+               console.log(err)
+            }
+            if (body) {
+                console.log(body)
+                a++
+                start1()
+            }
+        })
+    }
+}
+
+start1()
+
+let b = 0;
+
+const start2 = () => {
+    if (b < 10000) {
+        request(options, function (err, res, body) {
+            if (err) {
+               console.log(err)
+            }
+            if (body) {
+                console.log(body)
+                b++
+                start2()
+            }
+        })
+        
+    }
+}
+
+start2()
+
+let c = 0;
+
+const start3 = () => {
+    if (c < 10000) {
+        request(options, function (err, res, body) {
+            if (err) {
+               console.log(err)
+            }
+            if (body) {
+                console.log(body)
+                c++
+                start3()
+            }
+        })
+        
+    }
+}
+
+start3()
+
+
