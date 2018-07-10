@@ -1,7 +1,7 @@
 const rp = require('request-promise');
 const querystring = require('querystring');
 
-const url = 'https://h5.ele.me/hongbao/#hardware_id=&is_lucky_group=True&lucky_number=8&track_id=&platform=0&sn=29f9ce21dd1d8c7b&theme_id=2697&device_id=&refer_user_id=4808954';
+const url = 'https://h5.ele.me/hongbao/#hardware_id=&is_lucky_group=True&lucky_number=6&track_id=&platform=0&sn=29fde881ba9d8c45&theme_id=2697&device_id=&refer_user_id=4808954';
 const query = querystring.parse(url);
  
 const ary = [
@@ -49,7 +49,7 @@ const ary = [
     }
 ]
 
-const index = (totalLen, sn, num) => {
+const index = (totalLen, sn, num) => {  
     rp({
         method: 'POST',
         uri: `https://h5.ele.me/restapi/marketing/promotion/weixin/${ary[num].uuid}`,
@@ -68,10 +68,8 @@ const index = (totalLen, sn, num) => {
         })
     }).then(d => {
         const { promotion_records } = JSON.parse(d);
-        console.log(JSON.parse(d))
         const len = promotion_records.length;
-        console.log(len)
-        if (totalLen > len + ary.length) {
+        if (totalLen > len + ary.length - 1) {
             console.log('超过最大领取数')
             console.log(len)
             console.log(promotion_records[len - 1])
