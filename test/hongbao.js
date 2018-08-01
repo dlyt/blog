@@ -1,7 +1,7 @@
 const rp = require('request-promise');
 const querystring = require('querystring');
 
-const url = 'https://h5.ele.me/hongbao/#hardware_id=&is_lucky_group=True&lucky_number=6&track_id=&platform=0&sn=29fde881ba9d8c45&theme_id=2697&device_id=&refer_user_id=4808954';
+const url = 'https://h5.ele.me/hongbao/#hardware_id=&is_lucky_group=True&lucky_number=6&track_id=&platform=0&sn=2a01c593161d8c90&theme_id=2833&device_id=&refer_user_id=4808954';
 const query = querystring.parse(url);
  
 const ary = [
