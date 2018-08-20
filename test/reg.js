@@ -1,5 +1,9 @@
-const reg = /^1/
+const reg = /\.daoxila\.com$/
 
-const phone = 288
+const phone = 'n.daoxila.com'
 
 console.log(reg.test(phone))
+
+
+
+

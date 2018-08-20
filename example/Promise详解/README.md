@@ -79,3 +79,17 @@ finally 方法用于指定不管 Promise 对象最后状态如何，都会执行
 Promise化是指将一个不符合promise规范的API改造成返回promise的API。
 
 在Node.js中，通常的做法是使用`promisify`来包装非Promise对象，然后就可以使用符合promise规范的方法了。
+
+1、了解 Promise 吗？
+2、Promise 解决的痛点是什么？
+3、Promise 解决的痛点还有其他方法可以解决吗？如果有，请列举。
+4、Promise 如何使用？
+5、Promise 常用的方法，方法的作用？
+6、Promise 在事件循环中的执行过程是怎样的？
+7、Promise 的业界实现都有哪些？
+8、能不能手写一个 Promise 的 polyfill。
+
+作者：lucefer
+链接：https://juejin.im/post/5b31a4b7f265da595725f322
+来源：掘金
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
