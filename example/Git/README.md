@@ -1,5 +1,10 @@
 ### 新建本地分支
 ### 处理合并冲突
+```bach
+git stash
+git pull
+git stash pop
+```
 ```bash
 git merge dev
 ```
