@@ -3,4 +3,4 @@
 nginx -s reload
 ```
 ### mac路径
-/usr/local
+/usr/local/etc/nginx/nginx.conf

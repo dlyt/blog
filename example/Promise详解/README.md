@@ -88,8 +88,3 @@ Promise化是指将一个不符合promise规范的API改造成返回promise的AP
 6、Promise 在事件循环中的执行过程是怎样的？
 7、Promise 的业界实现都有哪些？
 8、能不能手写一个 Promise 的 polyfill。
-
-作者：lucefer
-链接：https://juejin.im/post/5b31a4b7f265da595725f322
-来源：掘金
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
