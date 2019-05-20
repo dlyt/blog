@@ -31,7 +31,7 @@ git submodule foreach git pull
 ```bash
 Subproject commit
 ```
-#### 克隆子模块
+#### 克隆子模块(添加子模块)
 ```bash
 git submodule add git@git.dxl.cc:node/dxlModule.git dxlModule
 ```

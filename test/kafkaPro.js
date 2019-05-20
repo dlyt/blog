@@ -26,3 +26,5 @@ producer.on('ready', function () {
 producer.on('error', function (err) {
     console.log('error', err);
 });
+
+// 修改 createBroker
