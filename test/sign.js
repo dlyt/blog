@@ -1,13 +1,14 @@
 let crypto = require("crypto");
-const time = Math.round(new Date().getTime() / 1000)
+const time = Math.round(new Date().getTime())
 console.log(time)
 const request = require('request')
 let sha1 = crypto.createHash('sha1');
 // let hString = time + "dxl:www.daoxila.com";
-// let hString = time + "d29c9a5f2cadab52cc2b746e680e5b8f42ced655";
-let hString = time + "dxl:www.daoxila.com" + '18840822922';
-// let hString = time + "phone=71010401221&status=1&addtime=1498215998&service=1&remarks=cs&price=1000" + 'd29c9a5f2cadab52cc2b746e680e5b8f42ced655';
+// let hString = time + "41ac5d19278bb7d8493bd4b854c3f829eb0478ea";
+// let hString = time + "dxl:www.daoxila.com" + '18840822922';
+let hString = "mobile=18840822922&time=" + time + "&callback=8888&key=f032c7ee8663d2ee83088863336b36eca1ecf9c1";
 // hString += '18840822822'
+console.log(hString)
 sha1.update(hString);
 let h1 = sha1.digest('hex');
 console.log(h1)
@@ -41,28 +42,24 @@ const p = {
 }
 
 const params = ksort(p)
-console.log(params)
 let str = ''
 for (let item in params) {
     str += item;
     str += params[item];
 }
-console.log(str)
 
 const data = md5(str)
-console.log(data)
 
 const token = md5('order201700006' + '1t69oskCpVFqZ5AMy7268b8W8s67TQizX7804' + time + data);
-console.log(token)
 function md5 (text) {
   return crypto.createHash('md5').update(text).digest('hex');
 };
 
 const url = `https://order.daoxila.com/appoint_order?from_site=front&limit=15&mode=get_user_appoint_order&page=1&params=%7B%22userId%22%3A%22198575%22%7D&type=21&secret_time=${time}&appid=order201700006&token=${token}`
 // const url = `http://order.daoxila.com/appoint_order?act=get_user_appoint_order&appid=order201700006&from_site=front&limit=15&page=1&secret_time=${time}&type=21&params={userId:1}&token=${token}`
-request(url, (err, res, body) => {
-    console.log(body)
-}) 
+// request(url, (err, res, body) => {
+//     console.log(body)
+// }) 
 
 // const r = requ
 
