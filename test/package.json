@@ -18,6 +18,7 @@
     "querystring": "^0.2.0",
     "request": "^2.83.0",
     "request-promise": "^4.2.2",
+    "urlsafe-base64": "^1.0.0",
     "weixinpay": "^1.0.12"
   }
 }

@@ -7,7 +7,7 @@ lsof -i:80
 ```bach
 kill -9 $(sudo lsof -i tcp:进程号 -t)
 ```
-### 切换淘宝镜像
+### 切换淘宝镜像 npm加速
 npm config set registry https://registry.npm.taobao.org --global
 npm config set disturl https://npm.taobao.org/dist --global
 
