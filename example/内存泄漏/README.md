@@ -36,7 +36,7 @@ Time per request        （平均每個要求所花費的時間(單位: 豪秒)�
 
 Time per request        （平均每個要求所花費的時間，所有同時連線數的平均值(單位: 豪秒)）
 
-Transfer rate           （從 ab 到 Web Server 之間的網路傳輸速度）
+Transfer rate           （從 /到 Web Server 之間的網路傳輸速度）
 
 Connection Times (ms)   （壓力測試時的連線處理時間）
 
@@ -53,7 +53,7 @@ max:      最大值
 
 縱軸欄位的部分：
 
-Connect:       從 ab 發出 TCP 要求到 Web 主機所花費的建立時間。
+Connect:       從 /發出 TCP 要求到 Web 主機所花費的建立時間。
 
 Processing:    從 TCP 連線建立後，直到 HTTP 回應(Response)的資料全部都收到所花的時間。
 

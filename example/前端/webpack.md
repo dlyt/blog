@@ -75,3 +75,45 @@ module.exports = {
     }
 }
 ```
+
+### 前端为何要进行打包和构建
+体积更小（Tree-ShaKing、压缩、合并），加载更快
+编译高级语言或语法（TS、ES6+、模块化、scss）
+兼容性和错误检查（Polyfill、postcss、eslint）
+
+统一、高效的开发环境
+统一的构建流程和产出标准
+集成公司构建规范（提测、上线等）
+
+### module、chunk、bundle 的区别
+module - 各个源码文件，webpack 中一切皆模块
+chunk - 多模块合并成的，如 entry import() splitChunk
+bundle - 最终的输出文件
+
+### loader 和 plugin 的区别
+loader 模块转换器，如 less -> css
+plugin 扩展插件，如 HtmlWebpackPlugin js或者css 塞进 html 中
+
+### babel 和 webpack 的区别
+babel - JS 新语法编译工具，不关心模块化
+webpack - 打包构建工具，是多个 loader plugin 的集合
+
+### bable-polyfill 和 bable-runtime 的区别
+bable-polyfill 会污染全局
+bable-runtime 不会污染全局
+产出第三方 lib 要用 bable-runtime
+
+### webpack 如何实现懒加载
+import()
+
+### 为何 Proxy 不能被 Polyfill
+class 可以用 function 模拟
+Promise 可以用 callback 来模拟
+但 Proxy 的功能用 Object.defineProperty 无法模拟
+
+### webpack 优化构建速度
+优化 babel-loader （开启缓存cacheDirectory、明确范围include）
+IgnorePlugin
+noParse
+happyPack
+ParallelUglifyPlugin
