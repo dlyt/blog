@@ -39,3 +39,15 @@ https://bigqianduan.top/libs/cjm.html
 第四种:提高父标签的z-index值
 
 ### JavaScript 如何工作：对引擎、运行时、调用堆栈的概述
+
+
+### 闭包
+函数作为参数被传递
+函数作为返回值被返回
+
+自由变量的查找，是在函数定义的地方，向上级作用域查找，不是在执行的地方；
+
+变量会常驻内存，得不到释放
+### call 和 apply 的区别
+fn.call(this, p1, p2, p3)
+fn.apply(this, arguments)

@@ -113,7 +113,10 @@ Promise 可以用 callback 来模拟
 
 ### webpack 优化构建速度
 优化 babel-loader （开启缓存cacheDirectory、明确范围include）
-IgnorePlugin
-noParse
-happyPack
-ParallelUglifyPlugin
+IgnorePlugin（plugins:[
+    //moment这个库中，如果引用了./locale/目录的内容，就忽略掉，不会打包进去
+	new Webpack.IgnorePlugin(/\.\/locale/,/moment/),
+]）
+noParse（当解析jq的时候，不会去解析jq这个库是否有依赖其他的包）
+happyPack（将文件解析任务分解成多个子进程并发执行。）
+ParallelUglifyPlugin（并行压缩代码）
