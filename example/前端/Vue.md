@@ -95,3 +95,5 @@ const proxyData = new Proxy(data, {
     }
 })
 ```
+### vue-router
+hash window.
