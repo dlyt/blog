@@ -96,4 +96,10 @@ const proxyData = new Proxy(data, {
 })
 ```
 ### vue-router
-hash window.
+原理：更新视图而不重新请求页面；
+hash 模式：
+    使用 hashchange 监听地址栏的 hash 值的变化，加载对应的页面。可前进后退；
+    JS 实现：window.onhashchange ，location.href = '#/user'；
+history 模式：
+    popstate 监听地址栏变化，使用 pushState(data, title, targetURL) 和 replaceState(但是会直接替换掉当前url,而不会在history中留下记录) 修改 url，无需加载页面。刷新页面会发起请求；
+    JS 实现：history.pushState({name: page1}, '', 'page1')、onpopstate；
