@@ -22,3 +22,7 @@
 解决方案：{ margin: 0; padding: 0; }
 2. 图片默认有间距
 解决方案：使用 float 属性为 img 布局
+
+### 块状元素和内联元素
+块状元素：display：block/table；独占一行；div，h1，table，ul，p 等；
+内联元素：display：inline/inline-block；span，img，input，button 等；

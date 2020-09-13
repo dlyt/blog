@@ -227,3 +227,64 @@ Last-Modified 只能精确到秒级；
     DNS 解析：域名 => IP 地址；
     浏览器根据 IP 地址向服务器发起 http 请求；
     服务器处理 http 请求，并返回给浏览器；
+渲染过程：
+    1，根据 HTML 代码生成 DOM Tree；根据 CSS 代码生成 CSSOM ；将 DOM Tree 和 CSSOM 整合形成 Render Tree；
+    2. 根据 Render Tree 渲染页面；遇到 script 则暂停渲染，优先加载并执行 JS 代码，完成再继续；直至把 Render Tree 渲染完成；
+
+### 前端性能优化
+让加载更快：
+    减少资源体积：压缩代码；
+    减少访问次数：合并代码，SSR 服务器端渲染，缓存；
+    CDN;
+让渲染更快：
+    CSS 放在 head，JS 放在 body 最下面；
+    尽早开始执行 JS，用 DOMContentLoaded 触发； 
+    懒加载；
+    对 DOM 查询进行缓存；
+    合并插入 DOM 结构；
+    节流 throttle 防抖 debounce
+
+### 节流
+```js
+function throttle (fn, delay = 100) {
+    let timer = null
+    return function () {
+        if (timer) {
+            return
+        }
+        timer = setTimeout(() => {
+            fn.apply(this, arguments);
+            timer = null;
+        }, delay)
+    }
+}
+
+div1.addEventListener('drag', throttle(function() {}, 100));
+```
+
+### var 和 let const 的区别
+var 有变量提升；var 和 let 是变量，可修改；const 是常亮，不可修改；let const 有块级作用域，var 没有；
+
+### typeof 能判断哪些类型
+undefined string number boolean symbol   object(typeof null === 'object')  function 
+
+### 强制类型转换和隐式类型转换
+强制：parseInt parseFloat toString
+隐式：if、逻辑运算符、==、+ 拼接字符串
+
+### 纯函数
+1. 函数的返回结果只依赖于它的参数。
+2. 函数执行过程里面没有副作用。
+
+### 阻止事件冒泡和默认行为
+event.stopPropagation()；event.preventDefault()；
+
+### 函数声明和函数表达式的区别
+函数声明 function fn() {}
+函数表达式 const fn = function() {}
+函数声明会在代码执行前预加载，而函数表达式不会
+
+### new Object() 和 Object.create() 区别
+{} 等同于 new Object() ，原型 Object.prototype
+Object.create(null) 没有原型
+Object.create({...}) 可指定原型
