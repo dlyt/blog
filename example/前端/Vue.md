@@ -103,3 +103,18 @@ hash 模式：
 history 模式：
     popstate 监听地址栏变化，使用 pushState(data, title, targetURL) 和 replaceState(但是会直接替换掉当前url,而不会在history中留下记录) 修改 url，无需加载页面。刷新页面会发起请求；
     JS 实现：history.pushState({name: page1}, '', 'page1')、onpopstate；
+
+### 动态组件
+`<component :is='name'>`、components: { name }；
+
+### Watch 和 Computed 的区别
+computed 适合多个数据变化影响一个数据
+watch 适合一个数据的变动影响多个数据或者复杂的运算
+
+computed：
+    有缓存
+    相当于计算data中的变量，并将结果赋值给computed中定义的变量。
+watch：
+    浅监听、deep = true 实现深度监听；
+    引用类型拿不到 oldVal;
+    相当于监听data中变量的改变，改变就有输出，不改变就无输出。
