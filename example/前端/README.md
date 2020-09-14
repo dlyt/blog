@@ -1,45 +1,4 @@
-```js
-//适配
-var $that = $(window), base_data;
-var winW = $that.width();
-var winH = $that.height();
-$that.on("resize", function () {
-    $("html").css("fontSize", $that.width() / 6.4);
-    // 获取屏幕尺寸宽高
-    if (winH / winW <= 1.6 && winH / winW > 1) {
-        $("html").css("fontSize", (winH / 1206) * 100 + "px");
-    }
-}).resize();
-```
-
-https://bigqianduan.top/libs/cjm.html
-
-### 什么是渐进式框架
-### z-index失效的几种情况
-失效的情况:
-
-1、父标签 position属性为relative；
-
-2、问题标签无position属性（不包括static）；
-
-3、问题标签含有浮动(float)属性。
-
-4、问题标签的祖先标签的z-index值比较小
-
-
-
-解决方法:
-
-第一种:  position:relative改为position:absolute；
-
-第二种:浮动元素添加position属性（如relative，absolute等）；
-
-第三种:去除浮动。
-
-第四种:提高父标签的z-index值
-
 ### JavaScript 如何工作：对引擎、运行时、调用堆栈的概述
-
 
 ### 闭包
 闭包就是能够读取其他函数内部变量的函数
@@ -203,7 +162,8 @@ event loop 就是异步回调的实现原理
 ### jsonp
 script 可绕过跨域限制；
 
-### cache-control
+### 强制缓存
+cache-control
 max-age 缓存时间；no-cache 不强制缓存，交给服务端处理；no-store 不缓存，服务端也不缓存；
 
 ### 协商缓存
@@ -224,12 +184,34 @@ Last-Modified 只能精确到秒级；
     媒体文件，图片，视频
     js，css
 加载过程：
+    缓存
     DNS 解析：域名 => IP 地址；
+    tcp 连接：
+        客向服发送连接请求报文 syn包（同步序列码） seq = j；
+        服务器接收客户端请求后回复ACK = j + 1, seq = k报文，并分配资源；
+        客户端收到ACK报文后，也向服务端发送ACK = k + 1报文，并分配资源；
+            TCP 使用三次握手建立连接的最主要原因是防止历史连接初始化了连接。
+                一个「旧 SYN 报文」比「最新的 SYN 」 报文早到达了服务端；
+                那么此时服务端就会回一个 SYN + ACK 报文给客户端；
+                客户端收到后可以根据自身的上下文，判断这是一个历史连接（序列号过期或超时），那么客户端就会发送 RST 报文给服务端，表示中止这一次连接。
+            同步双方初始序列号 3次就够了
+            2次握手，会造成资源浪费
     浏览器根据 IP 地址向服务器发起 http 请求；
     服务器处理 http 请求，并返回给浏览器；
 渲染过程：
     1，根据 HTML 代码生成 DOM Tree；根据 CSS 代码生成 CSSOM ；将 DOM Tree 和 CSSOM 整合形成 Render Tree；
     2. 根据 Render Tree 渲染页面；遇到 script 则暂停渲染，优先加载并执行 JS 代码，完成再继续；直至把 Render Tree 渲染完成；
+
+### 为什么4次挥手
+tcp是全双工通信
+（1）第一次挥手     因此当主动方发送断开连接的请求（即FIN报文）给被动方时，仅仅代表主动方不会再发送数据报文了，但主动方仍可以接收数据报文。    
+
+（2）第二次挥手     被动方此时有可能还有相应的数据报文需要发送，因此需要先发送ACK报文，告知主动方“我知道你想断开连接的请求了”。这样主动方便不会因为没有收到应答而继续发送断开连接的请求（即FIN报文）。   
+
+（3）第三次挥手    被动方在处理完数据报文后，便发送给主动方FIN报文；这样可以保证数据通信正常可靠地完成。发送完FIN报文后，被动方进入LAST_ACK阶段（超时等待）。   
+
+（4）第四挥手    如果主动方及时发送ACK报文进行连接中断的确认，这时被动方就直接释放连接，进入可用状态。
+
 
 ### 前端性能优化
 让加载更快：
@@ -243,8 +225,25 @@ Last-Modified 只能精确到秒级；
     对 DOM 查询进行缓存；
     合并插入 DOM 结构；
     节流 throttle 防抖 debounce
+### 防抖
+持续触发事件，一定时间内没有在触发，事件函数才会执行一次。
+```js
+function debounce(fn, wait) {
+    let timeout = null;
+    return function () {
+        if (timeout) {
+            clearTimeout(timeout);
+        }
+        timeout = setTimeout(() => {
+            fn.apply(this, arguments);
+            timeout = null;
+        }, wait);
+    }
+}
+```
 
 ### 节流
+触发事件的时候，设置定时器，再次触发如果定时器存在，就不执行，直到 delay 时间后，定时器执行函数，并清空定时器；
 ```js
 function throttle (fn, delay = 100) {
     let timer = null
@@ -288,3 +287,44 @@ event.stopPropagation()；event.preventDefault()；
 {} 等同于 new Object() ，原型 Object.prototype
 Object.create(null) 没有原型
 Object.create({...}) 可指定原型
+
+### 适配
+```js
+//适配
+var $that = $(window), base_data;
+var winW = $that.width();
+var winH = $that.height();
+$that.on("resize", function () {
+    $("html").css("fontSize", $that.width() / 6.4);
+    // 获取屏幕尺寸宽高
+    if (winH / winW <= 1.6 && winH / winW > 1) {
+        $("html").css("fontSize", (winH / 1206) * 100 + "px");
+    }
+}).resize();
+```
+
+https://bigqianduan.top/libs/cjm.html
+
+### 什么是渐进式框架
+### z-index失效的几种情况
+失效的情况:
+
+1、父标签 position属性为relative；
+
+2、问题标签无position属性（不包括static）；
+
+3、问题标签含有浮动(float)属性。
+
+4、问题标签的祖先标签的z-index值比较小
+
+
+
+解决方法:
+
+第一种:  position:relative改为position:absolute；
+
+第二种:浮动元素添加position属性（如relative，absolute等）；
+
+第三种:去除浮动。
+
+第四种:提高父标签的z-index值

@@ -1,8 +1,39 @@
-console.log(2)
-setTimeout(() => {
-    console.log(1)
+// new Promise((res, rej) => {
+//     console.log('a')
+//     res('b')
+// }).then(console.log)
+
+// Promise.resolve().then(console.log('c'))
+
+
+let v = new Promise(resolve => {
+    console.log("begin");
+    resolve("then");
 });
-Promise.resolve().then(() => {
-    console.log(4)
+
+new Promise(resolve => {
+    // console.log(v)
+    resolve(v); // 微 1
+}).then((v) => {
+    console.log(v)
+});
+
+
+// Promise.resolve(v).then((v)=>{
+//     console.log(v)
+// });
+
+
+new Promise(resolve => {
+    console.log(1);
+    resolve(); // 微2
 })
-console.log(3)
+    .then(() => {
+        console.log(2);
+    })
+    .then(() => {
+        console.log(3);
+    })
+    .then(() => {
+        console.log(4);
+    });
