@@ -1,63 +1,39 @@
-const aPromise = new Promise(function (res, rej) {
-    setTimeout(function() {
-        res(11)
-    }, 1000);
+// new Promise((res, rej) => {
+//     console.log('a')
+//     res('b')
+// }).then(console.log)
+
+// Promise.resolve().then(console.log('c'))
+
+
+let v = new Promise(resolve => {
+    console.log("begin");
+    resolve("then");
+});
+
+new Promise(resolve => {
+    // console.log(v)
+    resolve(v); // 微 1
+}).then((v) => {
+    console.log(v)
+});
+
+
+// Promise.resolve(v).then((v)=>{
+//     console.log(v)
+// });
+
+
+new Promise(resolve => {
+    console.log(1);
+    resolve(); // 微2
 })
-const bPromise = new Promise(function (res, rej) {
-    setTimeout(function() {
-        res(2)
-    }, 1000);
-})
-
-function start() {
-    let d
-    aPromise
-    .then(a => {    
-        d = a
-        return bPromise
+    .then(() => {
+        console.log(2);
     })
-    .then(b => {
-        console.log(d)
+    .then(() => {
+        console.log(3);
     })
-    .catch(err => {
-        console.log(err)
-    })
-    // return new Promise((resolve, reject) => {
-    //     let _a,_b 
-    //     aPromise
-    //         .then(a => {    
-    //             _a = a
-    //             return bPromise
-    //         })
-    //         .then(b => {
-    //             return resolve(_a)
-    //         })
-    //         .catch(err => {
-    //             return reject(err)
-    //         })
-    // })
-    
-}
-start()
-    // .then(d => {
-    //     console.log(d)
-    // })
-    // .catch(err => {
-    //     console.log(err)
-    //     return err
-    // })
-
-// const Promise = require('bluebird')
-// const aPromise = new Promise(function (res, rej) {
-//     setTimeout(function() {
-//         res(2)
-//     }, 1000);
-// })
-// aPromise.then( (d) => {
-//     console.log(d)
-// })
-// console.log(aPromise)
-
-// var INTERNAL = function(){};
-// var executor = function () {}
-// console.log(executor === INTERNAL)
+    .then(() => {
+        console.log(4);
+    });

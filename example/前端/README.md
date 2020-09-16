@@ -70,6 +70,11 @@ function test() {
 ```
 
 ### 数组
+join() 指定分隔符分隔；
+
+对于HTML元素本身就带有的固有属性，在处理时，使用prop方法。
+对于HTML元素我们自己自定义的DOM属性，在处理时，使用attr方法。
+
 .of()；.from()；
 arr.filter(() => {}) 筛选出符合多个条件的对象数组中的一些元素，组成新数组或者是直接覆盖原数组
 arr.find(() => {}) 找到第一个符合条件的，直接返回
@@ -78,9 +83,12 @@ keys()
 includes()
 values()
 arr.reduce((total, num) => { return total + num })
+
 ### call 和 apply 的区别
 fn.call(this, p1, p2, p3)
 fn.apply(this, arguments)
+
+bind()返回的其实是一个函数，并不会立即执行。
 
 bind 和 call 的区别，bind 会返回一个新的函数来执行；
 ### 手写深拷贝
@@ -212,6 +220,11 @@ tcp是全双工通信
 
 （4）第四挥手    如果主动方及时发送ACK报文进行连接中断的确认，这时被动方就直接释放连接，进入可用状态。
 
+关闭连接时，当Server端收到FIN报文时，很可能并不会立即关闭SOCKET，
+
+所以只能先回复一个ACK报文，告诉Client端，"你发的FIN报文我收到了"。
+
+只有等到我Server端所有的报文都发送完了，我才能发送FIN报文，因此不能一起发送。
 
 ### 前端性能优化
 让加载更快：
@@ -287,6 +300,25 @@ event.stopPropagation()；event.preventDefault()；
 {} 等同于 new Object() ，原型 Object.prototype
 Object.create(null) 没有原型
 Object.create({...}) 可指定原型
+
+### 值类型和引用类型的区别
+值类型：栈中存储。key: a，val：100；
+引用类型：在栈和堆中储存。栈：key：a，val：内存地址；堆：key：内存地址，val：{ a: 20 }；
+栈是从上往下叠加，堆是从下往上叠加。
+
+### 浅拷贝 和 深拷贝
+浅拷贝：
+    Object.assign() 当 object 只有一层的时候，是深拷贝；
+    Array.prototype.concat();
+    Array.prototype.slice();
+深拷贝：
+    JSON.parse(JSON.stringify())
+    手写递归方法
+    lodash、cloneDeep()
+
+### pm2 负载实现原理
+
+### https 实现原理
 
 ### 适配
 ```js

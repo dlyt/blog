@@ -1,7 +1,7 @@
 # 使用Apache HTTP server benchmarking tool进行压力测试
 ab -n 1000 -c 100  http://www.daoxila.com/HunYan/app
 
- -n requests     Number of requests to perform
+ -n requests    Number of requests to perform
 
 在测试会话中所执行的请求个数。默认时，仅执行一个请求
 -c concurrency Number of multiple requests to make

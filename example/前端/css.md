@@ -31,6 +31,21 @@
 offsetWidth = （内容宽度 + 内边距 + 边框），无外边距（margin）；
 box-sizing: border-box; 会使 offsetWidth = width；实际的 width 会缩小；
 
+### rem
+布局的本质是等比缩放；
+
+px 绝对长度单位；em 相对长度单位，相对于父元素；rem 相对长度单位，相对于根元素；
+
+### 页面视图尺寸
+window.screen.height // 屏幕高度 667
+
+window.innerHeight  // 视图高度 553
+
+### vw/vh
+vh 网页视图高度的 1/100
+
+vw 网页视图宽度的 1/100
+
 ### margin 纵向重叠问题
 相邻元素的 margin-top 和 margin-bottom 会发生重叠；取最大值；
 空白内容的 `<p> </p>` 也会重叠；
