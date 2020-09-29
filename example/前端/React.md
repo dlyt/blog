@@ -690,3 +690,6 @@ useEffect 中返回函数 fn
 useMemo 缓存数据；
 useCallback 缓存函数；
 
+### NEXT.JS
+getInitialProps 为什么只能在 page 上调用？
+next-i18next 子组件使用

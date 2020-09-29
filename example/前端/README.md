@@ -107,7 +107,7 @@ function deepClone(obj = {}) {
     for (let key in obj) {
         // 保证 key 不是原型属性
         if (obj.hasOwnProperty(key)) {
-            res[key] = deepClone(obj[key]);
+            rel[key] = deepClone(obj[key]);
         }
     }
     return {}
@@ -238,6 +238,7 @@ tcp是全双工通信
     对 DOM 查询进行缓存；
     合并插入 DOM 结构；
     节流 throttle 防抖 debounce
+
 ### 防抖
 持续触发事件，一定时间内没有在触发，事件函数才会执行一次。
 ```js
@@ -282,6 +283,7 @@ undefined string number boolean symbol   object(typeof null === 'object')  funct
 
 ### 强制类型转换和隐式类型转换
 强制：parseInt parseFloat toString
+
 隐式：if、逻辑运算符、==、+ 拼接字符串
 
 ### 纯函数
@@ -289,7 +291,9 @@ undefined string number boolean symbol   object(typeof null === 'object')  funct
 2. 函数执行过程里面没有副作用。
 
 ### 阻止事件冒泡和默认行为
-event.stopPropagation()；event.preventDefault()；
+event.stopPropagation()；e.cancelBubble = true；
+
+event.preventDefault()；
 
 ### 函数声明和函数表达式的区别
 函数声明 function fn() {}
@@ -316,9 +320,36 @@ Object.create({...}) 可指定原型
     手写递归方法
     lodash、cloneDeep()
 
+### js 垃圾回收机制
+
 ### pm2 负载实现原理
+问题：如果在执行I/O中遇到了阻塞就会降低整个应用的执行效率，导致CPU使用率高等不利原因。
+单线程的好处：比如避免了线程同步或者死锁、状态同步等等之类的问题。
+
+### TCP 和 UDP 的区别
+TCP 是面向连接的，UDP 是无连接的即发送数据前不需要先建立链接。
+
+可靠。
+
+TCP 是面向字节流，UDP 面向报文。
+
+TCP 首部20字节，UDP8字节
+
+### options 请求
+OPTIONS请求即预检请求，可用于检测服务器允许的http方法。当发起跨域请求时，由于安全原因，触发一定条件时浏览器会在正式请求之前自动先发起OPTIONS请求，即CORS预检请求，服务器若接受该跨域请求，浏览器才继续发起正式请求。
 
 ### https 实现原理
+区别：明文 端口 ；缺点：成本、加载延时、缓存不高效。
+
+客户端先要求服务器端建立 ssl 链接。
+
+服务器端会将网站的证书（包含公钥）传输给客户端。
+
+协商安全等级。
+
+客户端建立会话秘钥，用公钥加密，返回给服务器端，服务器用私钥解密出会话秘钥。
+
+通过会话秘钥加密与客户端之前的通信。
 
 ### 适配
 ```js
@@ -338,6 +369,35 @@ $that.on("resize", function () {
 https://bigqianduan.top/libs/cjm.html
 
 ### 什么是渐进式框架
+
+### cookie、sessionStorage、localStorage
+cookie 始终在同源的http请求中携带，可以限制cookie只属于某个路径下；
+
+cookie 只有4k；
+
+sessionStorage 仅在当前浏览器窗口关闭前有效；
+
+localStorage 始终有效
+
+### cookie 如何防范 xss 攻击
+XSS（跨站脚本攻击）是指攻击者在返回的HTML中嵌入javascript脚本，减轻这些攻击，在头部配置 set-cookie = httponly secure
+
+### cookie 和 session 的区别
+http是一个无状态协议，因此Cookie的最大作用就是存储 sessionId 用来唯一标识；
+
+### 一句话概括restful
+用URL定位资源，用HTTP描述操作；
+
+### click 在 ios 上有300ms延迟，原因及如何解决
+原因：一次点击屏幕，浏览器无法立即判断出双击缩放还是单机操作，所以会等待300ms；
+
+解决方案：
+    禁用缩放`<meta name='viewport' content='width=device-width,user-scalable=no'>`；
+    利用 FastClick，其原理：检测到 touchend 事件后，立即模拟 click 事件，并把浏览器300ms之后真正发出的事件给阻断掉；
+
+### addEventListener 参数
+
+
 ### z-index失效的几种情况
 失效的情况:
 
@@ -360,3 +420,7 @@ https://bigqianduan.top/libs/cjm.html
 第三种:去除浮动。
 
 第四种:提高父标签的z-index值
+
+
+
+可以自己带电脑，社保，电脑配置
