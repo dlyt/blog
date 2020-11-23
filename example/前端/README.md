@@ -1,3 +1,67 @@
+### js 的数据类型
+原始数据类型：null，undefined，Number，Symbol，BigInt，String
+引用类型：Object（包括：Array，Function，RegExp，Date）
+
+BigInt 就是解决此类问题
+```js
+const max = Number.MAX_SAFE_INTEGER; // 9007199254740991
+max + 1 // 9007199254740992
+max + 2 // 9007199254740992
+```
+Symbol 类型的使用场景
+Symbol 的目的就是为了实现一个唯一不重复不可变的值，任何一个 Symbol 都是唯一的，不会和其他任何 Symbol 相等
+
+### null 和 undefined 的区别
+null 代表空指针对象，typeof null == 'Object'  Number(null) == 0
+typeof undefined == undefined  Number(undefined) == undefinedx`
+
+### JavaScript 的内存管理
+内存的生命周期：分配=>使用=>释放
+简单类型：内存保存在栈（stack）中、固定大小、由操作系统自动分配和自动释放；
+复杂类型：内存保存在堆（heap）中、栈内存中存放地址指向堆内存中的对象，按引用访问、JS引擎手动释放内存；
+
+新生代垃圾回收器：
+  标记活动对象和非活动对象
+  复制 from space 的活动对象到 to space 并对其进行排序
+  释放 from space 中的非活动对象的内存
+  将 from space 和 to space 角色互换
+如何区分非活动对象
+  根对象遍历，搜索到就标记，没有标记的就是非活动对象
+新生代转换成老生代
+  先在子代（nursery）中，垃圾回收后还在就转到（intermediate）中，在进行垃圾回收还存在就放进老生代；
+
+老生代垃圾回收器
+  Mark-Sweep：
+    第一次扫描，标记非活动对象；
+    第二次扫描，清除非活动对象；
+  Mark-Compact
+    将所有的活动对象往一端移动，直接清掉边界外的内存；
+  全停顿、增量标记、惰性清理、并发、并行；
+
+
+### 1px 问题解决方案
+ 媒体查询利用设备像素比缩放，设置小数像素（对设备有要求，小数像素目前兼容性较差。）
+ viewport + rem 方案（以为缩放涉及全局的rem单位，比较适合新项目，对于老项目可能要涉及到比较多的改动。）
+ 设置 border-image 方案（需要制作图片，圆角可能出现模糊）
+  background-image 渐变实现（因为每个边框都是线性渐变颜色实现，因此无法实现圆角）
+  box-shadow 方案
+  transform: scale(0.5) 
+  媒体查询 + transfrom 对方案1的优化
+
+### 浏览器的渲染过程
+解析HTML构建DOM树，并行请求 css/image/js；
+css 文件下载完成，开始构建 CSSOM（CSS树）；
+CSSOM构建结束后，和 DOM 一起生成 Render Tree（渲染树）；
+布局（Layout)：计算出每个节点在屏幕中的位置；
+显示（painting）：通过显卡把页面画到屏幕上；
+### DOM树和渲染树的区别
+DOM树与HTML标签一一对应，包括head和隐藏元素；
+渲染树不包括head和隐藏元素，每一个节点都有对应的css属性；
+### CSS会阻塞dom解析吗
+css 不会阻塞 DOM 解析，但会阻塞 DOM 渲染；
+JS 阻塞 DOM 解析；
+
+
 ### JavaScript 如何工作：对引擎、运行时、调用堆栈的概述
 
 ### 闭包
@@ -91,6 +155,20 @@ fn.apply(this, arguments)
 bind()返回的其实是一个函数，并不会立即执行。
 
 bind 和 call 的区别，bind 会返回一个新的函数来执行；
+### 手写 bind 函数
+```js
+Function.prototype.bind = function () {
+    // 将参数拆解成数组
+    const args = Array.prototype.slice.call(arguments);
+    // 获取this
+    const t = args.shift();
+    const self = this;
+    return function () {
+        return self.apply(t, args)
+    }
+}
+```
+
 ### 手写深拷贝
 ```js
 function deepClone(obj = {}) {
@@ -131,19 +209,7 @@ extends
 this 取值是在函数执行的时候确认的，不是在定义的时候确认的
 箭头函数的 this 取值是取上级作用域的值
 
-### 手写 bind 函数
-```js
-Function.prototype.bind = function () {
-    // 将参数拆解成数组
-    const args = Array.prototype.slice.call(arguments);
-    // 获取this
-    const t = args.shift();
-    const self = this;
-    return function () {
-        return self.apply(t, args)
-    }
-}
-```
+
 
 ### 异步
 解决单线程等待的问题
@@ -275,8 +341,12 @@ function throttle (fn, delay = 100) {
 div1.addEventListener('drag', throttle(function() {}, 100));
 ```
 
+## es6 特性
 ### var 和 let const 的区别
-var 有变量提升；var 和 let 是变量，可修改；const 是常亮，不可修改；let const 有块级作用域，var 没有；
+var 有变量提升；
+var 和 let 是变量，可修改；
+const 是常亮，不可修改；
+let const 有块级作用域，var 没有；
 
 ### typeof 能判断哪些类型
 undefined string number boolean symbol   object(typeof null === 'object')  function 
