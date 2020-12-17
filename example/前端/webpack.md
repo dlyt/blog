@@ -1,81 +1,3 @@
-```js
-const path = require('path');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-var webpack = require('webpack');
-
-var pluginsConfig = [
-    new webpack.ProvidePlugin({
-        $: 'jquery',
-        jQuery: 'jquery',
-        $dxl: path.resolve(__dirname, "./lib/dxl.js"),    //dxl.js里面使用$dxl
-        dxlHttp: path.resolve(__dirname, "./lib/constant.js") //constant.js里面使用dxlHttp
-    }),
-    new MiniCssExtractPlugin({
-        filename: 'css/[name].css',
-        // chunkFilename: "css/[contenthash:12].css"
-    }),
-    new webpack.HotModuleReplacementPlugin()
-]
-
-//入口变量
-var entryFormat = function (p) {
-    var _p = {};
-
-    p.forEach(function (item) {
-        _p[item] = './src/' + item;
-        pluginsConfig.push(new HtmlWebpackPlugin({
-            chunks: [item], //添加引入的js,也就是entry中的key
-            filename: `html/${item}.html`,
-            minify: {
-                collapseWhitespace: true //折叠空白区域 也就是压缩代码
-            },
-            // hash:true,
-            template: `./src/${item}/index.html` //模板地址
-        }), )
-    });
-    return _p;
-}
-
-module.exports = {
-    entry: entryFormat(require('./page')),   //入口   导入page.js
-    output: {
-        path: path.join(__dirname, 'build'),
-        // publicPath: "//s5.dxlfile.com/",
-        filename: 'js/[name].js',
-        chunkFilename: "js/[id].wwwn.js"
-    },      //出口
-    devServer: {
-        contentBase: './build',
-        hot: true,
-        open: true          //自动打开浏览器
-    },   //服务器
-    module: {
-        rules: [
-            {
-                test: /\.css$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader']
-            },
-            {
-                test: /\.(png|jpg)$/,
-                use: 'url-loader?limit=0&name=img/[name].[ext]'
-            },
-            {
-                test: /\.html$/, use: ['html-loader']
-            },
-        ]
-    },         //模块配置
-    plugins: pluginsConfig,
-    mode: 'development',    //可以更改模式 
-    resolve: {//配置解析
-        modules: [
-            path.resolve(__dirname, "./lib"),
-            path.resolve(__dirname, "./node_modules")
-        ]
-    }
-}
-```
-
 ### 前端为何要进行打包和构建
 体积更小（Tree-ShaKing、压缩、合并），加载更快
 编译高级语言或语法（TS、ES6+、模块化、scss）
@@ -84,6 +6,31 @@ module.exports = {
 统一、高效的开发环境
 统一的构建流程和产出标准
 集成公司构建规范（提测、上线等）
+
+### Tree-shaking 的实现原理
+利用ES6模块特性：
+  只能作为模块顶层的语句出现
+  import的模块名只能是字符串常量
+  import bingding 是 immutable 的，引入的模块不能再进行修改
+代码删除：
+  uglify：判断程序流，判断变量是否被使用和引用，进而删除代码
+实现原理概述：
+  ES6 Module 引入进行静态分析，故而编译的时候正确判断到底加载了哪些模块
+  静态分析程序流，判断哪些模块和变量未被使用或者引用，进而删除对应代码
+备注：
+  Tree-shaking 不支持 CommonJs，所以需要配置不转义`options: { presets: [ [ 'es2015', { modules: false } ] ] }`
+  如果所有代码都不包含副作用，我们就可以简单地将该属性标记为false，来告知 webpack，它可以安全地删除未用到的export导出。`{"name": "tree-shaking","sideEffects": false}`
+
+### CommonJS 和 ES6 Module 的区别
+Com 输出的的是值的拷贝，ES6 模块输出的是值的引用
+Com 是运行时加载，ES6 是编译时输出接口
+webpack 转换方式不同
+
+能介绍一下缓存策略吗
+强缓存 cache-control、express
+协商缓存 304、ETag、modify
+301、302、307、308的区别
+
 
 ### module、chunk、bundle 的区别
 module - 各个源码文件，webpack 中一切皆模块
@@ -120,3 +67,5 @@ IgnorePlugin（plugins:[
 noParse（当解析jq的时候，不会去解析jq这个库是否有依赖其他的包）
 happyPack（将文件解析任务分解成多个子进程并发执行。）
 ParallelUglifyPlugin（并行压缩代码）
+
+### webpack-dev-server 原理和如何处理跨域

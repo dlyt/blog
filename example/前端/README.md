@@ -408,19 +408,6 @@ TCP 首部20字节，UDP8字节
 ### options 请求
 OPTIONS请求即预检请求，可用于检测服务器允许的http方法。当发起跨域请求时，由于安全原因，触发一定条件时浏览器会在正式请求之前自动先发起OPTIONS请求，即CORS预检请求，服务器若接受该跨域请求，浏览器才继续发起正式请求。
 
-### https 实现原理
-区别：明文 端口 ；缺点：成本、加载延时、缓存不高效。
-
-客户端先要求服务器端建立 ssl 链接。
-
-服务器端会将网站的证书（包含公钥）传输给客户端。
-
-协商安全等级。
-
-客户端建立会话秘钥，用公钥加密，返回给服务器端，服务器用私钥解密出会话秘钥。
-
-通过会话秘钥加密与客户端之前的通信。
-
 ### 适配
 ```js
 //适配
@@ -440,14 +427,7 @@ https://bigqianduan.top/libs/cjm.html
 
 ### 什么是渐进式框架
 
-### cookie、sessionStorage、localStorage
-cookie 始终在同源的http请求中携带，可以限制cookie只属于某个路径下；
 
-cookie 只有4k；
-
-sessionStorage 仅在当前浏览器窗口关闭前有效；
-
-localStorage 始终有效
 
 ### cookie 如何防范 xss 攻击
 XSS（跨站脚本攻击）是指攻击者在返回的HTML中嵌入javascript脚本，减轻这些攻击，在头部配置 set-cookie = httponly secure

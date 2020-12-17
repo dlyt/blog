@@ -1,15 +1,16 @@
-有100匹马，场地只有4条跑道，得出最快的4只马需要多少轮 Lam：100匹马，4个赛道，找出跑最快的4匹马。
-已知函数fn1会随机返回1 - 5的整数，要求基于fn1编写fn2，要随机生成1 - 7，fn2内不能使用系统的随机api，只能调用fn1获取随机数
+var longestCommonPrefix = function (strs) {
+  if (strs.length === 0) return;
+  let ans = strs[0];
+  for (let i = 0; i < strs.length; i++) {
+    let j = 0
+    for (; j < ans.length && j < strs[i].length; j++) {
+      if (ans[j] !== strs[i][j]) break;
+    }
+    ans = ans.substr(0, j);
+    if (ans === '') return;
+  }
+  return ans
+};
 
-1 2 3
-2 2 2
-3 3
-4 4
 
-10
-
-31
-
-25 / 4
-
-25 + 6
+console.log(longestCommonPrefix(["fldower", "fldow", "flight"]))
