@@ -2,12 +2,12 @@
 // initialize tracer
 const rest = require('rest');
 const express = require('express');
-const {Tracer} = require('zipkin');
-const {recorder} = require('./recorder');
+const { Tracer } = require('zipkin');
+const { recorder } = require('./recorder');
 const CLSContext = require('zipkin-context-cls');
 
 const ctxImpl = new CLSContext('zipkin');
-const tracer = new Tracer({ctxImpl, recorder});
+const tracer = new Tracer({ ctxImpl, recorder });
 
 const app = express();
 
@@ -20,12 +20,15 @@ app.use(zipkinMiddleware({
 
 const request = require('request')
 const wrapRequest = require('zipkin-instrumentation-request');
-const zipkinRequest = wrapRequest(request, {tracer, serviceName: 'request-zk'});
+const zipkinRequest = wrapRequest(request, { tracer, serviceName: 'request-zk' });
 
 app.get('/', (req, res) => {
-   zipkinRequest('http://localhost:9000/api', function (err, response, body) {
-       res.send(body)
-   })
+  setTimeout(() => {
+    zipkinRequest('http://localhost:9000/api', function (err, response, body) {
+      res.send(body)
+    })
+  }, 100);
+
 });
 
 app.listen(8081, () => {

@@ -630,7 +630,7 @@ React 一些东西需要自己添加，Vue 全面一些
 相同业务逻辑，分散到各个方法中，逻辑混乱
 复用逻辑变的复杂
 
-### useReducer 和 redux 的区别
+### useReducer 和 redux 的区别 ***
 useReducer 是 useState 的代替方案，用于 state 复杂变化
 useReducer 是单组件状态管理，组件通讯还需要 props
 redux 是全局的状态管理，多组件共享数据
@@ -640,10 +640,15 @@ React 默认会更新所有子组件
 class 组件使用 SCU 和 PureComponent 做优化
 Hooks 中使用 useMemo，但优化原理相同
 
-### Hooks 使用规范
-只能用于 React 函数组件和自定义 Hook 中，其他地方不可以
-只能用于顶层代码，不能在循环，判断中使用 Hooks; 不能在它上面打断它，提前return；因为 Hooks 严重依赖于调用顺序；
+通过对props的浅对比进行优化
 
+### Hooks 使用规范 ***
+只能用于 React 函数组件和自定义 Hook 中，其他地方不可以
+只能用于顶层代码，不能在循环，判断中使用 Hooks; 不能在它上面打断它，提前return；因为 Hooks 严重依赖于调用顺序；如果hooks出现在循环判断中，则无法保证顺序一致。
+
+函数组件，纯函数，执行完即销毁。所以，无论组件初始化（render）还是组件更新（re-render）。都会重新执行一次这个函数，获取最新的组件。和 class 不一样 （有实例）
+
+useState、useEffect取值跟顺序有关系
 ### Mixins 的问题
 变量作用域来源不清
 属性重名
@@ -670,11 +675,19 @@ useEffect 依赖引用类型，会出现死循环；
 ### 为什么使用 Hooks
 完善函数组件的能力，函数更适合 React 组件；
 组件逻辑复用，Hooks 表现更好；
+
 class 复杂组件正在变得费解，不易拆解，不易测试，逻辑混乱；
 
+相同的业务逻辑分散在各个方法中
 DidMount 和 DidUpdate 中获取数据
 DidMount 绑定事件，WillUnMount 解绑事件；
 使用 Hooks，相同逻辑可分割到一个一个的 useEffect 中；
+
+useEffect 让纯函数有了副作用
+
+### 函数组件的特点
+没有组件实例；没有生命周期；没有state，setState，只能接受props；
+函数组件是一个纯函数，执行完即销毁，无法储存state.
 
 ### React Hooks 模拟组件生命周期
 模拟 componentDidMount - useEffect 依赖 [];
@@ -684,7 +697,7 @@ DidMount 绑定事件，WillUnMount 解绑事件；
 useEffect 中返回函数 fn
     useEffect 依赖 []，组件销毁执行 fn，等于 WillUnMount；
     useEffect 无依赖或者依赖 [a, b]，组件更新时执行 fn；
-    即，下一次执行 useEffect 之前，就会执行 fn，无论更新或卸载；
+    即，下一次执行 useEffect 之前，就会执行 fn，无论更新或卸载；****
 
 ### React Hooks 性能优化
 useMemo 缓存数据；
@@ -693,3 +706,4 @@ useCallback 缓存函数；
 ### NEXT.JS
 getInitialProps 为什么只能在 page 上调用？
 next-i18next 子组件使用
+
