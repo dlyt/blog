@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "async": "^2.6.2",
+    "async": "^3.2.2",
     "avsc": "^5.4.7",
     "commander": "^2.15.1",
     "kafka-node": "^4.0.4",
